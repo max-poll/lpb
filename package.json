@@ -1,0 +1,25 @@
+{
+  "name": "landing-page-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mxpoll/lpb.git"
+  },
+  "author": "mxpoll",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mxpoll/lpb/issues"
+  },
+  "homepage": "https://github.com/mxpoll/lpb#readme",
+  "devDependencies": {
+    "bootstrap": "^4.5.3",
+    "gulp": "^4.0.2",
+    "gulp-pug": "^4.0.1",
+    "gulp-pug-linter": "^1.4.0"
+  }
+}

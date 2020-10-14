@@ -1,0 +1,20 @@
+# GIT
+/.git/
+
+# NODE modules
+/node_modules/
+
+# OS files
+/**/Thumbs.db
+/**/*.DS_Store
+
+# Editors files
+.idea
+*.sublime*
+.vscode
+
+# logs
+*.log*
+
+# Build folder with files
+build/
