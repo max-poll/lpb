@@ -1,4 +1,5 @@
-import $ from '../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min'
+// Optional
+import $ from '../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
 
 $();
 
