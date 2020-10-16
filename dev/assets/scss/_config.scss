@@ -13,16 +13,16 @@ $gutter: $grid-gutter-width;
 // IMPORT SECTION
 
 // Required
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
 
 // Optional
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
-@import "../node_modules/bootstrap/scss/images";
-@import "../node_modules/bootstrap/scss/code";
-@import "../node_modules/bootstrap/scss/grid";
+@import "../../../node_modules/bootstrap/scss/reboot";
+@import "../../../node_modules/bootstrap/scss/type";
+@import "../../../node_modules/bootstrap/scss/images";
+@import "../../../node_modules/bootstrap/scss/code";
+@import "../../../node_modules/bootstrap/scss/grid";
 
 // FONTS LOAD SECTION
 
@@ -36,10 +36,10 @@ $gutter: $grid-gutter-width;
   }
 }
 
-@include font('Roboto', normal, 400, '../fonts/roboto-regular-webfont.woff2');
-@include font('Roboto', italic, 400, '../fonts/roboto-italic-webfont.woff2');
-@include font('Roboto', normal, 700, '../fonts/roboto-bold-webfont.woff2');
-@include font('Roboto', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2');
+//@include font('Roboto', normal, 400, '../fonts/roboto-regular-webfont.woff2');
+//@include font('Roboto', italic, 400, '../fonts/roboto-italic-webfont.woff2');
+//@include font('Roboto', normal, 700, '../fonts/roboto-bold-webfont.woff2');
+//@include font('Roboto', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2');
 
 // GENERAL DOCUMENT STYLES
 

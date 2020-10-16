@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+  },
+  "extends": "stylelint-config-standard-scss"
+}
