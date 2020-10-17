@@ -1,1 +1,14 @@
-
++section('footer', 'footer')
+    footer(itemscope itemtype="http://schema.org/LocalBusiness")
+        p(itemprop="name") Название компании
+        div(itemprop="address" itemscope itemtype="http://schema.org/PostalAddress")
+            ul
+                li Адрес
+                    span(itemprop="streetAddress") Ленина 1
+                    span(itemprop="addressLocality") Санкт-Петербург
+                    span(itemprop="addressRegion") Ленинградская обл.
+                    span(itemprop="addressCountry" content="RU")
+                li Время работы менеджера-консультанта:
+                    span(itemprop="openingHours" content="Mo, Tu, We, Th, Fr, Sa, Su, 10:00-21:00") 10:00 - 21:00 Ежедневно
+                li(itemprop="telephone") 206-555-1234
+                li(itemprop="email") info@wikimedia.org

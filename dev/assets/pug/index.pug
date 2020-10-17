@@ -1,16 +1,16 @@
+include components/mixins
+
 doctype html
-html(lang="ru")
-    head
-        include components/head
+html(lang="ru-RU")
+    include blocks/head
     body
+        include components/preloader
+
         main#app
-            #manager
-                div
-                    div.title
-                        div
             include blocks/header
             include blocks/advantages
             include blocks/contacts
+            include blocks/footer
 
+        include components/cookieModal
         include components/scripts
-        include blocks/footer
