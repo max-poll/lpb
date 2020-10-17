@@ -12,25 +12,24 @@ const paths = {
 
   scripts: {
     src: [
-      '../node_modules/bootstrap/dist/js/bootstrap.bundle.min', // Bootstrap bundle
-      devDir + '/js/app.js' // app.js. Always at the end
+      `${devDir}/assets/js/app.js` // app.js. Always at the end
     ],
-    dest: buildDir + '/js' // Deploy js folder
+    dest: `${buildDir}/js` // Deploy js folder
   },
 
   template: {
-    src: devDir + '/assets/' + preprocessorHTML + '/index.pug',
-    dest: buildDir + '/' // Deploy html folder
+    src: `${devDir}/assets/${preprocessorHTML}/index.pug`, // Dev html folder
+    dest: `${buildDir}/` // Deploy html folder
   },
 
   styles: {
-    src: devDir + '/assets/' + preprocessorCSS + '/style.scss',
-    dest: buildDir + '/css' // Deploy css folder
+    src: `${devDir}/assets/${preprocessorCSS}/style.scss`, // Dev css folder
+    dest: `${buildDir}/css` // Deploy css folder
   },
 
   images: {
-    src: devDir + '/assets/images/**/*',
-    dest: buildDir + '/images' // Deploy images folder
+    src: `${devDir}/assets/images/**/*`, // Dev images folder
+    dest: `${buildDir}/images` // Deploy images folder
   },
 
   deploy: {
@@ -46,32 +45,35 @@ const paths = {
 
 const { src, dest, parallel, series, watch } = require('gulp')
 
-// eslint-disable-next-line no-unused-vars
+// Template
 const plumber = require('gulp-plumber') // pipe error fix
-// eslint-disable-next-line no-unused-vars
 const pug = require('gulp-pug') // HTML preprocessor
 const pugLinter = require('gulp-pug-linter') // Pug linter
 const htmlValidator = require('gulp-w3c-html-validator') // HTML validator
 const htmlmin = require('gulp-htmlmin') // HTML minifier
 
+// Styles
 const scss = require('gulp-sass') // CSS preprocessor
 const autoprefixer = require('gulp-autoprefixer') // CSS autoprefixer
-const shorthand = require('gulp-shorthand')
+const shorthand = require('gulp-shorthand') //
 const cleancss = require('gulp-clean-css') // CSS cleaner
 const styleLint = require('gulp-stylelint')
 
+// Scripts
 const eslint = require('gulp-eslint')
 const babel = require('gulp-babel')
 const terser = require('gulp-terser')
 
+// Images
 const imagemin = require('gulp-imagemin')
 
+// Other
+const del = require('del')
+const newer = require('gulp-newer')
+const rename = require('gulp-rename')
+const rsyncGulp = require('gulp-rsync')
 const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync').create()
-const rename = require('gulp-rename')
-const newer = require('gulp-newer')
-const rsyncGulp = require('gulp-rsync')
-const delFiles = require('del')
 
 function browsersync () {
   browserSync.init({
@@ -101,13 +103,12 @@ function styles () {
     .pipe(sourcemaps.init())
     .pipe(styleLint({
       failAfterError: true,
-      reportOutputDir: 'reports/lint',
+      reportOutputDir: 'reports/cssLint',
       reporters: [
         { formatter: 'json', save: 'report.json' }
       ],
       debug: true
     }))
-  // eslint-disable-next-line no-eval
     .pipe(eval(preprocessorCSS)().on('error', scss.logError))
     .pipe(shorthand())
     .pipe(autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true }))
@@ -140,7 +141,7 @@ function images () {
 }
 
 function cleanimg () {
-  return del('' + paths.images.dest + '/**/*', { force: true })
+  return del(`${paths.images.dest}/**/*`, { force: true })
 }
 
 function deploy () {

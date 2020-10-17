@@ -3,9 +3,14 @@ html(lang="ru")
     head
         include components/head
     body
-        #app
+        main#app
+            #manager
+                div
+                    div.title
+                        div
             include blocks/header
+            include blocks/advantages
+            include blocks/contacts
 
-        script(src="js/app.js")
-
+        include components/scripts
         include blocks/footer
