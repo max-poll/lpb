@@ -1,0 +1,17 @@
+mixin section(name, classes)
+    #{name}(class=classes)
+        .container
+            .row
+
+mixin sectionFluid(name, classes)
+    #{name}(class=classes)
+        .container-fluid
+            .row
+
+mixin link(href, name)
+    a(href=href)&attributes(attributes)= name
+
+mixin list(classes, ...items)
+    ul(id=classes)
+      each item in items
+          li= item

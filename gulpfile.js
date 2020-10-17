@@ -6,7 +6,6 @@ const fileswatch = 'txt,json,md,woff2' // List of files extensions for watching 
 const imageswatch = 'jpg,jpeg,png,webp,svg' // List of images extensions for watching & compression (comma separated)
 const devDir = 'dev' // Base directory path without «/» at the end
 const buildDir = 'build' // Base directory path without «/» at the end
-const online = true // If «false» - Browsersync will work offline without internet connection
 
 const paths = {
 
@@ -46,7 +45,6 @@ const paths = {
 const { src, dest, parallel, series, watch } = require('gulp')
 
 // Template
-const plumber = require('gulp-plumber') // pipe error fix
 const pug = require('gulp-pug') // HTML preprocessor
 const pugLinter = require('gulp-pug-linter') // Pug linter
 const htmlValidator = require('gulp-w3c-html-validator') // HTML validator
@@ -72,6 +70,7 @@ const del = require('del')
 const newer = require('gulp-newer')
 const rename = require('gulp-rename')
 const rsyncGulp = require('gulp-rsync')
+const plumber = require('gulp-plumber') // pipe error fix
 const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync').create()
 
@@ -79,12 +78,15 @@ function browsersync () {
   browserSync.init({
     server: { baseDir: buildDir + '/' },
     notify: false,
-    online: online
+    online: true,
+    open: true,
+    cors: true
   })
 }
 
 function scripts () {
   return src(paths.scripts.src)
+    .pipe(plumber())
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(sourcemaps.init())
@@ -100,7 +102,7 @@ function scripts () {
 
 function styles () {
   return src(paths.styles.src)
-    .pipe(sourcemaps.init())
+    .pipe(plumber())
     .pipe(styleLint({
       failAfterError: true,
       reportOutputDir: 'reports/cssLint',
@@ -109,9 +111,10 @@ function styles () {
       ],
       debug: true
     }))
+    .pipe(sourcemaps.init())
     .pipe(eval(preprocessorCSS)().on('error', scss.logError))
+    .pipe(autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true, cascade: false }))
     .pipe(shorthand())
-    .pipe(autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true }))
     .pipe(cleancss({ level: { 1: { specialComments: 0 } }/* format: 'beautify' */ }))
     .pipe(sourcemaps.write())
     .pipe(rename({ suffix: '.min' }))
@@ -121,8 +124,8 @@ function styles () {
 
 function template () {
   return src(paths.template.src)
-    .pipe(pugLinter())
-  // eslint-disable-next-line no-eval
+    .pipe(plumber())
+    .pipe(pugLinter({ reporter: 'default' }))
     .pipe(eval(preprocessorHTML)())
     .pipe(htmlValidator({ reporter: 'default' }))
     .pipe(htmlmin({
@@ -160,11 +163,11 @@ function deploy () {
 }
 
 function startwatch () {
-  watch(devDir + '/' + preprocessorHTML + '/**/*', { usePolling: true }, template)
-  watch(devDir + '/' + preprocessorCSS + '/**/*', { usePolling: true }, styles)
-  watch(devDir + '/images/**/*.{' + imageswatch + '}', { usePolling: true }, images)
+  watch(devDir + '/assets/' + preprocessorHTML + '/**/*', { usePolling: true }, template)
+  watch(devDir + '/assets/' + preprocessorCSS + '/**/*', { usePolling: true }, styles)
+  watch(devDir + '/assets/images/**/*.{' + imageswatch + '}', { usePolling: true }, images)
   watch(buildDir + '/**/*.{' + fileswatch + '}', { usePolling: true }).on('change', browserSync.reload)
-  watch([devDir + '/js/**/*.js', '!' + paths.scripts.dest + '/*.min.js'], { usePolling: true }, scripts)
+  watch([devDir + '/assets/js/**/*.js', '!' + paths.scripts.dest + '/*.min.js'], { usePolling: true }, scripts)
 }
 
 exports.browsersync = browsersync
@@ -175,4 +178,4 @@ exports.scripts = scripts
 exports.images = images
 exports.cleanimg = cleanimg
 exports.deploy = deploy
-exports.default = parallel(images, template, styles, scripts, browsersync, startwatch)
+exports.start = parallel(images, template, styles, scripts, browsersync, startwatch)
