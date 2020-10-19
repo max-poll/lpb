@@ -79,4 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
   replacerMain(content);
 
   /* UTM REPLACER */
-});
+})
