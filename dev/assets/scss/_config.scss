@@ -23,6 +23,9 @@ $gutter: $grid-gutter-width;
 @import "../../../node_modules/bootstrap/scss/images";
 @import "../../../node_modules/bootstrap/scss/grid";
 
+// REWRITE BOOTSTRAP VARIABLES SECTION
+
+
 // FONTS LOAD SECTION
 
 @mixin font($fname, $fstyle, $fweight, $furl) {

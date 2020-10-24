@@ -1,11 +1,11 @@
-mixin section(name, classes)
-    #{name}(class=classes)
+mixin section(name, id, classes)
+    #{name}(id=id, class=classes)
         .container
             .row
                 block
 
-mixin sectionFluid(name, classes)
-    #{name}(class=classes)
+mixin sectionFluid(name, id, classes)
+    #{name}(id=id, class=classes)
         .container-fluid
             .row
                 block
@@ -14,11 +14,6 @@ mixin link(href, name)
     a(href=href)&attributes(attributes)= name
 
 mixin list(classes, ...items)
-    ul(id=classes)
-      each item in items
-          li= item
-
-mixin navList(classes, ...items)
     ul(id=classes)
       each item in items
           li= item

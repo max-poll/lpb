@@ -4,13 +4,14 @@ doctype html
 html(lang="ru-RU")
     include blocks/head
     body
-        include components/preloader
+        include blocks/preloader
 
         main#app
             include blocks/header
             include blocks/advantages
+            include blocks/callToAction
             include blocks/contacts
             include blocks/footer
 
-        include components/cookieModal
-        include components/scripts
+        include blocks/cookieModal
+        include blocks/scripts

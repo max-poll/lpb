@@ -1,0 +1,24 @@
+#header {
+  min-height: 100vh;
+
+  .intro {
+    margin-top: 30vh;
+    width: 100%;
+
+    .intro-title,
+    .intro-subtitle {
+      text-align: center;
+    }
+
+    .btn-group {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 5px 25px;
+    }
+  }
+}

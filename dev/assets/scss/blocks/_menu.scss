@@ -1,0 +1,28 @@
+#menu {
+  width: 100%;
+
+  .top-logo {
+    img {
+      width: 100%;
+    }
+  }
+
+  .top-links {
+    nav {
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        list-style-type: none;
+
+        li {
+          padding: 15px 0;
+
+          &:not(last-child) {
+            margin-right: 40px;
+          }
+        }
+      }
+    }
+  }
+}

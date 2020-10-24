@@ -1,7 +1,18 @@
-+section('div', 'menu')
-    .col-6
-        .top-logo
-            img(src="#" alt="logo")
-    .col-6
-        .top-links
-            +list('top-links_list', `<a href="#">Link</a>`)
+#menu
+    .row
+        .col-sm-4.col-md-3
+            .top-logo
+                a(href="#")
+                    img(src="images/LogoGrey.png" alt="logo")
+        .col-sm-8.col-md-9
+            .top-links
+                nav
+                    ul
+                        li
+                            +link('#', 'Link1')
+                        li
+                            +link('#', 'Link2')
+                        li
+                            +link('#', 'Link3')
+                        li
+                            +link('#', 'Link4')
